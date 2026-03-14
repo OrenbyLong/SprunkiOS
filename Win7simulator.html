@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 7 Simulator - Win7simulator.com</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --taskbar-bg: rgba(20, 40, 60, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --start-gradient: radial-gradient(circle, #5cb1ff 0%, #004593 100%);
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%; overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
+            background: #000;
+        }
+
+        /* --- Boot Sequence --- */
+        #boot-screen {
+            position: fixed; inset: 0; background: black; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 1s ease;
+        }
+
+        .win-logo {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 40px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        .logo-part { width: 40px; height: 40px; border-radius: 2px; }
+        .red { background: #f35325; } .green { background: #81bc06; }
+        .blue { background: #05a6f0; } .yellow { background: #ffba08; }
+
+        @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+        .loader {
+            width: 180px; height: 4px; background: #222; border-radius: 2px;
+            position: relative; overflow: hidden;
+        }
+        .loader::after {
+            content: ''; position: absolute; left: -50px; width: 60px; height: 100%;
+            background: linear-gradient(90deg, transparent, #52a8ff, transparent);
+            animation: loading 1.5s infinite linear;
+        }
+        @keyframes loading { from { left: -60px; } to { left: 180px; } }
+
+        /* --- Desktop --- */
+        #desktop {
+            height: 100%; display: none;
+            background: url('https://images.unsplash.com/photo-1518112166137-85909569cc0c?q=80&w=2500&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* --- Aero Taskbar --- */
+        .taskbar {
+            position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+            z-index: 1000; display: flex; align-items: center; padding: 0 4px;
+            background: rgba(15, 30, 50, 0.5);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .start-btn {
+            width: 52px; height: 52px; background: var(--start-gradient);
+            border-radius: 50%; border: 2px solid rgba(255,255,255,0.3);
+            cursor: pointer; margin-bottom: 12px; display: flex;
+            align-items: center; justify-content: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5); transition: 0.2s;
+        }
+        .start-btn:hover { transform: scale(1.1); box-shadow: 0 0 20px #52a8ff; }
+        .start-btn svg { width: 26px; height: 26px; fill: white; filter: drop-shadow(0 0 2px black); }
+
+        /* --- Start Menu (Win 7 Style) --- */
+        .start-menu {
+            position: absolute; bottom: 45px; left: 5px; width: 420px; height: 550px;
+            background: rgba(220, 235, 255, 0.85); backdrop-filter: blur(20px);
+            border-radius: 6px 6px 0 0; border: 1px solid var(--glass-border);
+            display: none; flex-direction: column; z-index: 999;
+            box-shadow: 0 0 40px rgba(0,0,0,0.6); padding: 6px;
+        }
+        .start-menu.active { display: flex; }
+
+        .menu-inner { display: flex; height: 100%; border-radius: 4px; overflow: hidden; }
+        
+        .menu-left { 
+            width: 60%; background: white; padding: 10px; 
+            display: flex; flex-direction: column;
+        }
+        .menu-right { 
+            width: 40%; background: linear-gradient(to right, rgba(200,220,245,0.5), rgba(160,190,230,0.5));
+            border-left: 1px solid rgba(0,0,0,0.1); padding: 15px 10px;
+        }
+
+        .menu-item {
+            display: flex; align-items: center; padding: 8px; margin-bottom: 2px;
+            border-radius: 4px; cursor: pointer; font-size: 13px; color: #222;
+        }
+        .menu-item:hover { background: linear-gradient(#f0f7ff, #cfe3fb); outline: 1px solid #7da2ce; }
+        .menu-right .menu-item { font-weight: 600; color: #1e395b; }
+        .menu-right .menu-item:hover { background: rgba(255,255,255,0.3); outline: none; }
+
+        .menu-footer {
+            height: 48px; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 10px; background: rgba(0,0,0,0.05); border-radius: 0 0 4px 4px;
+        }
+
+        .search-box {
+            width: 65%; height: 26px; border: 1px solid #999; padding: 0 8px;
+            font-size: 12px; font-style: italic; outline: none;
+        }
+
+        .shutdown-btn {
+            background: linear-gradient(#4a86c5, #215192); color: white;
+            padding: 3px 12px; border: 1px solid #103a71; border-radius: 3px;
+            font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+        }
+
+        /* --- Desktop Items --- */
+        .desktop-icons { padding: 10px; display: flex; flex-direction: column; gap: 10px; }
+        .icon {
+            width: 80px; padding: 10px; text-align: center; cursor: pointer;
+            border: 1px solid transparent; border-radius: 4px;
+        }
+        .icon:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.2); }
+        .icon-symbol { font-size: 42px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+        .icon-text { color: white; font-size: 12px; text-shadow: 1px 1px 2px #000; margin-top: 5px; }
+
+        /* --- Shutdown Overlay --- */
+        #shutdown-overlay {
+            position: fixed; inset: 0; background: black; z-index: 10001;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            color: white; font-size: 18px;
+        }
+
+        .clock {
+            margin-left: auto; color: white; text-align: right;
+            padding-right: 15px; font-size: 12px; line-height: 1.1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Màn hình Boot -->
+    <div id="boot-screen">
+        <div class="win-logo">
+            <div class="logo-part red"></div>
+            <div class="logo-part green"></div>
+            <div class="logo-part blue"></div>
+            <div class="logo-part yellow"></div>
+        </div>
+        <div class="loader"></div>
+        <p style="color: #888; margin-top: 20px; font-size: 14px;">win7simulator.com</p>
+    </div>
+
+    <!-- Màn hình Shutdown -->
+    <div id="shutdown-overlay">
+        <div class="win-logo" style="transform: scale(0.5); opacity: 0.5;">
+            <div class="logo-part red"></div><div class="logo-part green"></div>
+            <div class="logo-part blue"></div><div class="logo-part yellow"></div>
+        </div>
+        <p>Shutting down...</p>
+    </div>
+
+    <!-- Màn hình Desktop chính -->
+    <div id="desktop">
+        <div class="desktop-icons">
+            <div class="icon">
+                <div class="icon-symbol">🖥️</div>
+                <div class="icon-text">Computer</div>
+            </div>
+            <div class="icon">
+                <div class="icon-symbol">🗑️</div>
+                <div class="icon-text">Recycle Bin</div>
+            </div>
+            <div class="icon">
+                <div class="icon-symbol">🌐</div>
+                <div class="icon-text">Internet Explorer</div>
+            </div>
+        </div>
+
+        <!-- Start Menu -->
+        <div id="startMenu" class="start-menu">
+            <div class="menu-inner">
+                <div class="menu-left">
+                    <div class="menu-item">📁 Documents</div>
+                    <div class="menu-item">📝 Notepad</div>
+                    <div class="menu-item">🎨 Paint</div>
+                    <div class="menu-item">🧮 Calculator</div>
+                    <div class="menu-item">🕹️ Solitaire</div>
+                    <div class="mt-auto pt-2 border-t text-blue-800 font-bold text-xs">All Programs <span class="float-right">▶</span></div>
+                </div>
+                <div class="menu-right">
+                    <div class="menu-item">User</div>
+                    <div class="menu-item">Documents</div>
+                    <div class="menu-item">Pictures</div>
+                    <div class="h-px bg-gray-400/30 my-2"></div>
+                    <div class="menu-item">Computer</div>
+                    <div class="menu-item">Control Panel</div>
+                    <div class="menu-item">Help and Support</div>
+                </div>
+            </div>
+            <div class="menu-footer">
+                <input type="search" class="search-box" placeholder="Search programs and files">
+                <button class="shutdown-btn" onclick="powerOff()">
+                    Shut down <span style="font-size: 8px;">▶</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <div id="startBtn" class="start-btn">
+                <svg viewBox="0 0 24 24"><path d="M3,5 L11,6 L11,11 L3,11 Z M13,5.8 L21,5 L21,11 L13,11 Z M3,13 L11,13 L11,18 L3,19 Z M13,13 L21,13 L21,19 L13,18 Z"/></svg>
+            </div>
+            
+            <div class="flex items-center ml-4 space-x-2">
+                <div class="p-1 hover:bg-white/20 rounded cursor-pointer">🌐</div>
+                <div class="p-1 hover:bg-white/20 rounded cursor-pointer">📂</div>
+                <div class="p-1 hover:bg-white/20 rounded cursor-pointer">🖼️</div>
+            </div>
+
+            <div class="clock">
+                <div id="clock-time">12:00 PM</div>
+                <div id="clock-date">14/03/2026</div>
+            </div>
+            <div class="w-2 h-full bg-white/5 border-l border-white/10 ml-2"></div>
+        </div>
+    </div>
+
+    <script>
+        // Hiệu ứng khởi động
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('boot-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('boot-screen').style.display = 'none';
+                    document.getElementById('desktop').style.display = 'block';
+                }, 1000);
+            }, 3500);
+        };
+
+        // Điều khiển Start Menu
+        const startBtn = document.getElementById('startBtn');
+        const startMenu = document.getElementById('startMenu');
+
+        startBtn.onclick = (e) => {
+            startMenu.classList.toggle('active');
+            e.stopPropagation();
+        };
+
+        window.onclick = () => startMenu.classList.remove('active');
+
+        // Chức năng tắt máy
+        function powerOff() {
+            document.getElementById('shutdown-overlay').style.display = 'flex';
+            setTimeout(() => {
+                document.body.innerHTML = '';
+                document.body.style.backgroundColor = 'black';
+            }, 2500);
+        }
+
+        // Đồng hồ hệ thống
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock-time').innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('clock-date').innerText = now.toLocaleDateString('vi-VN');
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
