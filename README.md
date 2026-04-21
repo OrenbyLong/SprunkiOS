@@ -1,14 +1,14 @@
 This Is the Beta SprunkiOS make like ubuntu but custom
 3 apps can open because this beta i make it but is not working app
 Waiting the SprunkiOS update I have Some Photo this Version
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-40" src="https://github.com/user-attachments/assets/0366d801-10f3-4b17-baea-ff2eeea657be" />
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-39" src="https://github.com/user-attachments/assets/48cfa01a-1659-4371-ab72-147fb0343d01" />
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-35" src="https://github.com/user-attachments/assets/201c6ce5-ec58-4e44-8787-de7bc6920e5f" />
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-23-57" src="https://github.com/user-attachments/assets/e056f5e6-62b5-41f3-ad1f-593ec5403fb8" />
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-29" src="https://github.com/user-attachments/assets/7ac65eea-126c-4285-8bd1-92a8eb608b71" />
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-21" src="https://github.com/user-attachments/assets/34c00b5b-d75e-479b-8336-58370e5c9183" />
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-13" src="https://github.com/user-attachments/assets/6b5079b5-cd71-4c69-9265-0ae484957761" />
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-09" src="https://github.com/user-attachments/assets/6ad1aeff-0247-4513-bd7e-dbf5fc53695a" />
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-07" src="https://github.com/user-attachments/assets/de65f859-3caf-4f28-9c71-8c4b3504825a" />
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-04" src="https://github.com/user-attachments/assets/3f88872e-17a8-47de-b4ed-5c3f5b4791c5" />
-<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-00" src="https://github.com/user-attachments/assets/5a6082e2-940d-4eee-9712-9a2f9132678e" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-40" src="https://github.com/user-attachments/assets/8b5e150c-3b6d-490e-888c-075a262544f4" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-39" src="https://github.com/user-attachments/assets/f6d207d2-af0a-482f-aa2c-bf3e0665ac6b" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-35" src="https://github.com/user-attachments/assets/f361963f-6635-408a-a48a-b61e773dca28" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-29" src="https://github.com/user-attachments/assets/9df2db7b-316d-447a-8943-941991bda8f0" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-21" src="https://github.com/user-attachments/assets/a262c595-1aad-4c48-9fb4-481f371fa826" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-13" src="https://github.com/user-attachments/assets/ecc1bef3-1798-4c95-87d0-765a1d20b0f3" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-09" src="https://github.com/user-attachments/assets/410241f3-480c-412a-946e-fcc6fef00f02" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-07" src="https://github.com/user-attachments/assets/e77e5f99-cda6-49bf-a51d-1e24428e1ff1" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-04" src="https://github.com/user-attachments/assets/a25f3cf4-a837-429c-842f-dfe43e6f1171" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-00" src="https://github.com/user-attachments/assets/44eab4c0-7e12-4b52-a15d-16f77b9e8421" />
+<img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-23-57" src="https://github.com/user-attachments/assets/88fd7ccb-56e0-4088-b6aa-c0d78943abc7" />
