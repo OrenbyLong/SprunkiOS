@@ -1,6 +1,7 @@
 This Is the Beta SprunkiOS make like ubuntu but custom
 3 apps can open because this beta i make it but is not working app
 Waiting the SprunkiOS update I have Some Photo this Version
+You Need to Watch from bottom up
 <img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-40" src="https://github.com/user-attachments/assets/70f7c6a8-3da5-473f-8b66-41cd07bd1559" />
 <img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-39" src="https://github.com/user-attachments/assets/dce32045-91f1-4ec4-9d20-2f8d31673be3" />
 <img width="1920" height="1080" alt="Chụp màn hình từ 2026-04-21 11-24-35" src="https://github.com/user-attachments/assets/499744e4-ecd5-43f5-9a5e-1899ba2f9e43" />
